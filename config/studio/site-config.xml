@@ -22,8 +22,8 @@
 -->
 <site-config>
     <version>4.0.1</version>
-    <wem-project>nuxtjs-starter</wem-project>
-    <display-name>nuxtjs-starter</display-name>
+    <wem-project>angular-starter</wem-project>
+    <display-name>angular-starter</display-name>
 
     <!-- Site URLs. Default to http://localhost:8080 if blank -->
     <site-urls>
