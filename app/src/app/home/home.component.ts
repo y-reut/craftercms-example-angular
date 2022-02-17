@@ -23,8 +23,8 @@ export class HomeComponent implements OnInit {
       this.model = model;
       this.attributes['content_o'] = [];
       this.attributes['title_s'] = getICEAttributes({ model, fieldId: 'title_s' });
-      for (let i = 0; i < model.content_o.length; i += 1) {
-        const component = model.content_o[i];
+      for (let i = 0; i < this.model.content_o.length; i += 1) {
+        const component = this.model.content_o[i];
         const attr:any = {};
         attr['self'] = getICEAttributes({ model: component, index: i });
         attr['title_s'] = getICEAttributes({ model: component, fieldId: 'title_s', index: i });
