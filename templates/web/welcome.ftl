@@ -39,7 +39,7 @@
       If you named your site <strong>angular-samle</strong> and CrafterCMS is running on <strong>localhost:8080</strong>,
       no further edits are necessary; otherwise, change the file accordingly.
     </li>
-    <li>Run `yarn dev` to start the node server on localhost:3000</li>
+    <li>Run `yarn dev` to start the node server on localhost:4200</li>
     <li>Open Site Tools and select "Configuration"</li>
     <li>Search for "Proxy Config"</li>
     <li>Comment line 58 and uncomment line 59</li>
