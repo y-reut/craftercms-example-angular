@@ -24,7 +24,7 @@ export class AboutComponent implements OnInit {
       const attributes = getICEAttributes({ model, fieldId: 'title_s' });
       this.attributes = attributes;
 
-      fetchIsAuthoring().then(isAuthoring => {
+      fetchIsAuthoring().then((isAuthoring: boolean) => {
         if (isAuthoring && this.model && this.model.craftercms) {
           initInContextEditing({
             path: this.model.craftercms.path

@@ -21,20 +21,18 @@ export class HomeComponent implements OnInit {
    ngOnInit(): void {
     getModel().then(model => {
       this.model = model;
-      const attributes = {};
-      attributes['content_o'] = [];
-      attributes['title_s'] = getICEAttributes({ model, fieldId: 'title_s' });
+      this.attributes['content_o'] = [];
+      this.attributes['title_s'] = getICEAttributes({ model, fieldId: 'title_s' });
       for (let i = 0; i < model.content_o.length; i += 1) {
         const component = model.content_o[i];
-        const attr = {};
+        const attr:any = {};
         attr['self'] = getICEAttributes({ model: component, index: i });
         attr['title_s'] = getICEAttributes({ model: component, fieldId: 'title_s', index: i });
         attr['background_s'] = getICEAttributes({ model: component, fieldId: 'background_s', index: i });
-        attributes['content_o'].push(attr);
+        this.attributes['content_o'].push(attr);
       }
-      this.attributes = attributes;
 
-      fetchIsAuthoring().then(isAuthoring => {
+      fetchIsAuthoring().then((isAuthoring: boolean) => {
         if (isAuthoring && this.model && this.model.craftercms) {
           initInContextEditing({
             path: this.model.craftercms.path
