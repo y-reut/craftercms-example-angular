@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { crafterConf } from '@craftercms/classes';
+import { environment } from '../environments/environment';
+
+import { getNav } from './lib/api';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +10,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  title = 'CrafterCMS + Angular Sample';
+  copyright = `@CrafterCMS ${new Date().getFullYear()}`;
+  navItems: any[] = [];
+
+  constructor() {
+    crafterConf.configure({
+      baseUrl: environment.PUBLIC_CRAFTERCMS_HOST_NAME ?? '',
+      site: environment.PUBLIC_CRAFTERCMS_SITE_NAME ?? '',
+      cors: true,
+    });
+
+    getNav().then(navItems => {
+      this.navItems = navItems;
+    });
+  }
 }

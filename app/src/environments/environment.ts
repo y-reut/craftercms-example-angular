@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  PUBLIC_CRAFTERCMS_HOST_NAME: "http://localhost:8080",
+  PUBLIC_CRAFTERCMS_SITE_NAME: "angular-sample"
 };
 
 /*

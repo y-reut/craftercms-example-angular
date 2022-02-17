@@ -1,0 +1,14 @@
+<h1>{{ model.title_s }}</h1>
+<div>
+  <div *ngFor="let component of model.content_o">
+    <div>
+      <div
+        class="backgroud"
+        [ngStyle]="{ 'background-image': 'url(' + baseUrl + component.background_s + ')' }"
+      >
+        <h2>
+          {{component.title_s}}
+        </h2>
+      </div>
+    </div>
+</div>
