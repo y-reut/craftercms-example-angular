@@ -1,14 +1,45 @@
-<h1>{{ model.title_s }}</h1>
-<div>
-  <div *ngFor="let component of model.content_o">
-    <div>
+<div
+  [attr.data-craftercms-model-id]="attributes['data-craftercms-model-id']"
+  [attr.data-craftercms-model-path]="attributes['data-craftercms-model-path']"
+>
+  <h1
+    [attr.data-craftercms-model-id]="attributes['title_s']['data-craftercms-model-id']"
+    [attr.data-craftercms-model-path]="attributes['title_s']['data-craftercms-model-path']"
+    [attr.data-craftercms-field-id]="'title_s'"
+  >
+    {{ model.title_s }}
+  </h1>
+  <div
+    [attr.data-craftercms-model-id]="attributes['data-craftercms-model-id']"
+    [attr.data-craftercms-model-path]="attributes['data-craftercms-model-path']"
+    [attr.data-craftercms-field-id]="'content_o'"
+  >
+    <div
+      *ngFor="let component of model.content_o; index as i"
+      [attr.data-craftercms-model-id]="attributes['content_o']['data-craftercms-model-id']"
+      [attr.data-craftercms-model-path]="attributes['content_o']['data-craftercms-model-path']"
+      [attr.data-craftercms-field-id]="'content_o'"
+      [attr.data-craftercms-index]="i"
+    >
       <div
-        class="backgroud"
-        [ngStyle]="{ 'background-image': 'url(' + baseUrl + component.background_s + ')' }"
+        [attr.data-craftercms-model-id]="attributes['content_o'][i]['self']['data-craftercms-model-id']"
+        [attr.data-craftercms-model-path]="attributes['content_o'][i]['self']['data-craftercms-model-path']"
       >
-        <h2>
-          {{component.title_s}}
-        </h2>
+        <div
+          class="backgroud"
+          [ngStyle]="{ 'background-image': 'url(' + baseUrl + component.background_s + ')' }"
+          [attr.data-craftercms-model-id]="attributes['content_o'][i]['background_s']['data-craftercms-model-id']"
+            [attr.data-craftercms-model-path]="attributes['content_o'][i]['background_s']['data-craftercms-model-path']"
+          [attr.data-craftercms-field-id]="'background_s'"
+        >
+          <h2
+            [attr.data-craftercms-model-id]="attributes['content_o'][i]['title_s']['data-craftercms-model-id']"
+            [attr.data-craftercms-model-path]="attributes['content_o'][i]['title_s']['data-craftercms-model-path']"
+            [attr.data-craftercms-field-id]="'title_s'"
+          >
+            {{component.title_s}}
+          </h2>
+        </div>
       </div>
-    </div>
+  </div>
 </div>
