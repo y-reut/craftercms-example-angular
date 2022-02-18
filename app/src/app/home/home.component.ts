@@ -3,7 +3,7 @@
 import { Component, OnInit } from '@angular/core';
 import { fetchIsAuthoring, initInContextEditing, getICEAttributes }  from '@craftercms/experience-builder';
 
-import { getModel } from '../lib/api';
+import { getModelByUrl } from '../lib/api';
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -13,13 +13,16 @@ import { environment } from '../../environments/environment';
 })
 export class HomeComponent implements OnInit {
   public model: any = {};
-  public attributes: any = {};
+  public attributes: any = {
+    'title_s': {},
+    'content_o': [],
+  };
   public baseUrl: string = environment.PUBLIC_CRAFTERCMS_HOST_NAME ?? '';
 
   constructor() {}
 
    ngOnInit(): void {
-    getModel().then(model => {
+    getModelByUrl().then(model => {
       this.model = model;
       this.attributes['content_o'] = [];
       this.attributes['title_s'] = getICEAttributes({ model, fieldId: 'title_s' });

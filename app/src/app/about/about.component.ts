@@ -3,7 +3,7 @@
 import { Component, OnInit } from '@angular/core';
 import { fetchIsAuthoring, initInContextEditing, getICEAttributes }  from '@craftercms/experience-builder';
 
-import { getModel } from '../lib/api';
+import { getModelByUrl } from '../lib/api';
 
 @Component({
   selector: 'app-about',
@@ -19,7 +19,7 @@ export class AboutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    getModel('/site/website/about/index.xml').then(model => {
+    getModelByUrl('/about').then(model => {
       this.model = model;
       const attributes = getICEAttributes({ model, fieldId: 'title_s' });
       this.attributes = attributes;
