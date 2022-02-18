@@ -25,8 +25,7 @@ export class AboutComponent implements OnInit {
   };
   public attributes: any = {};
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {
     getModelByUrl('/about').then((model: ContentInstance | ContentInstance[]) => {
