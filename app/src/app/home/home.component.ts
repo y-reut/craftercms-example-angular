@@ -30,16 +30,17 @@ export class HomeComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    getModelByUrl().then((model: ContentInstance | ContentInstance[]) => {
-      this.model = model instanceof Array ? model[0] : model;
-      fetchIsAuthoring().then((isAuthoring: boolean) => {
-        if (isAuthoring && this.model && this.model.craftercms) {
-          this.isAuthoring = isAuthoring;
-          initInContextEditing({
-            path: this.model.craftercms.path
-          });
-        }
-      });
+    getModelByUrl()
+      .subscribe((model: ContentInstance | ContentInstance[]) => {
+        this.model = model instanceof Array ? model[0] : model;
+        fetchIsAuthoring().then((isAuthoring: boolean) => {
+          if (isAuthoring && this.model && this.model.craftercms) {
+            this.isAuthoring = isAuthoring;
+            initInContextEditing({
+              path: this.model.craftercms.path
+            });
+          }
+        });
     });
   }
 

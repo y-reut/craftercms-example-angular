@@ -21,7 +21,7 @@ export class AppComponent {
       cors: true,
     });
 
-    getNav().then(navItems => {
+    getNav().subscribe(navItems => {
       this.navItems = navItems;
     });
   }

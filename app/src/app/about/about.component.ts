@@ -28,18 +28,19 @@ export class AboutComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    getModelByUrl('/about').then((model: ContentInstance | ContentInstance[]) => {
-      this.model = model instanceof Array ? model[0] : model;
-      const attributes = getICEAttributes({ model, fieldId: 'title_s' });
-      this.attributes = attributes;
+    getModelByUrl('/about')
+      .subscribe((model: ContentInstance | ContentInstance[]) => {
+        this.model = model instanceof Array ? model[0] : model;
+        const attributes = getICEAttributes({ model, fieldId: 'title_s' });
+        this.attributes = attributes;
 
-      fetchIsAuthoring().then((isAuthoring: boolean) => {
-        if (isAuthoring) {
-          initInContextEditing({
-            path: this.model.craftercms.path
-          });
-        }
+        fetchIsAuthoring().then((isAuthoring: boolean) => {
+          if (isAuthoring) {
+            initInContextEditing({
+              path: this.model.craftercms.path
+            });
+          }
+        });
       });
-    });
   }
 }
