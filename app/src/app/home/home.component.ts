@@ -1,6 +1,7 @@
-// @ts-nocheck
-
 import { Component, OnInit } from '@angular/core';
+import { ContentInstance } from '@craftercms/models';
+
+// @ts-expect-error
 import { fetchIsAuthoring, initInContextEditing, getICEAttributes }  from '@craftercms/experience-builder';
 
 import { getModelByUrl } from '../lib/api';
@@ -12,7 +13,17 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  public model: any = {};
+  public model: ContentInstance = {
+    craftercms: {
+      id: '',
+      path: '',
+      label: '',
+      dateCreated: '',
+      dateModified: '',
+      contentTypeId: '',
+    },
+    content_o: [],
+  };
   public attributes: any = {
     'title_s': {},
     'content_o': [],
@@ -22,12 +33,11 @@ export class HomeComponent implements OnInit {
   constructor() {}
 
    ngOnInit(): void {
-    getModelByUrl().then(model => {
-      this.model = model;
-      this.attributes['content_o'] = [];
+    getModelByUrl().then((model: ContentInstance | ContentInstance[]) => {
+      this.model = model instanceof Array ? model[0] : model;
       this.attributes['title_s'] = getICEAttributes({ model, fieldId: 'title_s' });
-      for (let i = 0; i < this.model.content_o.length; i += 1) {
-        const component = this.model.content_o[i];
+      for (let i = 0; i < this.model['content_o'].length; i += 1) {
+        const component = this.model['content_o'][i];
         const attr:any = {};
         attr['self'] = getICEAttributes({ model: component, index: i });
         attr['title_s'] = getICEAttributes({ model: component, fieldId: 'title_s', index: i });

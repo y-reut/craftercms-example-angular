@@ -1,6 +1,7 @@
-// @ts-nocheck
-
 import { Component, OnInit } from '@angular/core';
+import { ContentInstance } from '@craftercms/models';
+
+// @ts-expect-error
 import { fetchIsAuthoring, initInContextEditing, getICEAttributes }  from '@craftercms/experience-builder';
 
 import { getModelByUrl } from '../lib/api';
@@ -12,20 +13,29 @@ import { getModelByUrl } from '../lib/api';
 })
 export class AboutComponent implements OnInit {
 
-  public model: any = {};
-  public attributes: {[attrName: string]: string} = {};
+  public model: ContentInstance = {
+    craftercms: {
+      id: '',
+      path: '',
+      label: '',
+      dateCreated: '',
+      dateModified: '',
+      contentTypeId: '',
+    },
+  };
+  public attributes: any = {};
 
   constructor() {
   }
 
   ngOnInit(): void {
-    getModelByUrl('/about').then(model => {
-      this.model = model;
+    getModelByUrl('/about').then((model: ContentInstance | ContentInstance[]) => {
+      this.model = model instanceof Array ? model[0] : model;
       const attributes = getICEAttributes({ model, fieldId: 'title_s' });
       this.attributes = attributes;
 
       fetchIsAuthoring().then((isAuthoring: boolean) => {
-        if (isAuthoring && this.model && this.model.craftercms) {
+        if (isAuthoring) {
           initInContextEditing({
             path: this.model.craftercms.path
           });
