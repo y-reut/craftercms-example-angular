@@ -22,8 +22,7 @@ export class BaseIceComponent implements OnInit {
       dateCreated: '',
       dateModified: '',
       contentTypeId: '',
-    },
-    content_o: [],
+    }
   };
   public baseUrl: string = environment.PUBLIC_CRAFTERCMS_HOST_NAME ?? '';
   path: string = '';
