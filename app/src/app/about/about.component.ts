@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ContentInstance } from '@craftercms/models';
+import { from, forkJoin } from 'rxjs';
 
 // @ts-expect-error
 import { fetchIsAuthoring, initInContextEditing, getICEAttributes }  from '@craftercms/experience-builder';
@@ -23,24 +24,28 @@ export class AboutComponent implements OnInit {
       contentTypeId: '',
     },
   };
-  public attributes: any = {};
+  isAuthoringContext: boolean = false;
 
   constructor() {}
 
   ngOnInit(): void {
-    getModelByUrl('/about')
-      .subscribe((model: ContentInstance | ContentInstance[]) => {
-        this.model = model instanceof Array ? model[0] : model;
-        const attributes = getICEAttributes({ model, fieldId: 'title_s' });
-        this.attributes = attributes;
-
-        fetchIsAuthoring().then((isAuthoring: boolean) => {
-          if (isAuthoring) {
-            initInContextEditing({
-              path: this.model.craftercms.path
-            });
-          }
+    forkJoin({
+      isAuthoring: from(fetchIsAuthoring()),
+      model: getModelByUrl('/about'),
+    }).subscribe(({ isAuthoring, model }) => {
+      this.model = model instanceof Array ? model[0] : model;
+      if (isAuthoring && this.model && this.model.craftercms) {
+        this.isAuthoringContext = true;
+        initInContextEditing({
+          path: this.model.craftercms.path
         });
-      });
+      }
+    });
+  }
+
+  getIce(params: any): Promise<any> {
+    const { model, index, fieldId } = params;
+    const isAuthoring = this.isAuthoringContext;
+    return getICEAttributes({ model, fieldId, index, isAuthoring });
   }
 }
