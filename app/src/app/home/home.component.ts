@@ -24,34 +24,28 @@ export class HomeComponent implements OnInit {
     },
     content_o: [],
   };
-  public attributes: any = {
-    'title_s': {},
-    'content_o': [],
-  };
   public baseUrl: string = environment.PUBLIC_CRAFTERCMS_HOST_NAME ?? '';
+  isAuthoring: boolean = false;
 
   constructor() {}
 
-   ngOnInit(): void {
+  ngOnInit(): void {
     getModelByUrl().then((model: ContentInstance | ContentInstance[]) => {
       this.model = model instanceof Array ? model[0] : model;
-      this.attributes['title_s'] = getICEAttributes({ model, fieldId: 'title_s' });
-      for (let i = 0; i < this.model['content_o'].length; i += 1) {
-        const component = this.model['content_o'][i];
-        const attr:any = {};
-        attr['self'] = getICEAttributes({ model: component, index: i });
-        attr['title_s'] = getICEAttributes({ model: component, fieldId: 'title_s', index: i });
-        attr['background_s'] = getICEAttributes({ model: component, fieldId: 'background_s', index: i });
-        this.attributes['content_o'].push(attr);
-      }
-
       fetchIsAuthoring().then((isAuthoring: boolean) => {
         if (isAuthoring && this.model && this.model.craftercms) {
+          this.isAuthoring = isAuthoring;
           initInContextEditing({
             path: this.model.craftercms.path
           });
         }
       });
     });
-   }
+  }
+
+  getIce(params: any): Promise<any> {
+    const { model, index, fieldId } = params;
+    const isAuthoring = this.isAuthoring;
+    return getICEAttributes({ model, fieldId, index, isAuthoring });
+  }
 }

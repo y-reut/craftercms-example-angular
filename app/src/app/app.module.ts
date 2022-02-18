@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
+import { NgAttributesDirective } from './ng-attributes.directive';
 @NgModule({
   declarations: [
     AppComponent,
     AboutComponent,
     HomeComponent,
+    NgAttributesDirective,
   ],
   imports: [
     BrowserModule,

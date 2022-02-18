@@ -1,8 +1,5 @@
 <h1
-  [attr.data-craftercms-model-id]="attributes['data-craftercms-model-id']"
-  [attr.data-craftercms-model-path]="attributes['data-craftercms-model-path']"
-  [attr.data-craftercms-field-id]="'title_s'"
-  [attr.data-craftercms-label]="attributes['data-craftercms-label']"
+  [ngAttributes]="attributes"
 >
   {{ model['title_s'] }}
 </h1>
