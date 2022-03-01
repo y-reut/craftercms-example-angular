@@ -14,21 +14,22 @@ import { environment } from '../../environments/environment';
 })
 
 export class BaseIceComponent implements OnInit {
-  public model: ContentInstance = {
-    craftercms: {
-      id: '',
-      path: '',
-      label: '',
-      dateCreated: '',
-      dateModified: '',
-      contentTypeId: '',
-    }
-  };
+  public model: ContentInstance;
   public baseUrl: string = environment.PUBLIC_CRAFTERCMS_HOST_NAME ?? '';
   path: string = '';
 
   constructor(router: Router) {
     this.path = router.url;
+    this.model = {
+      craftercms: {
+        id: '',
+        path: '',
+        label: '',
+        dateCreated: '',
+        dateModified: '',
+        contentTypeId: '',
+      }
+    };
   }
 
   ngOnInit(): void {

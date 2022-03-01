@@ -1,5 +1,7 @@
-<h1
-  [ngAttributes]="getIce({ model, fieldId: 'title_s' })"
->
-  {{ model['title_s'] }}
-</h1>
+<ng-template [ngIf]="model && model.craftercms && model.craftercms.id">
+  <h1
+    [ngAttributes]="getIce({ model, fieldId: 'title_s' })"
+  >
+    {{ model['title_s'] }}
+  </h1>
+</ng-template>
