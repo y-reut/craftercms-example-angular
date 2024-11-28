@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  PUBLIC_CRAFTERCMS_HOST_NAME: "http://localhost:8080",
-  PUBLIC_CRAFTERCMS_SITE_NAME: "angular-sample"
+  PUBLIC_CRAFTERCMS_HOST_NAME: "http://34.172.86.9:8080",
+  PUBLIC_CRAFTERCMS_SITE_NAME: "angular",
 };
 
 /*
