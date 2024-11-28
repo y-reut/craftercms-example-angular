@@ -36,7 +36,7 @@
     </li>
     <li>
       Create a copy of <em>app/src/environments/environment.ts.sample</em> to produce <em>app/src/environments/environment.ts</em>.
-      If you named your site <strong>angular-sample</strong> and CrafterCMS is running on <strong>localhost:8080</strong>,
+      If you named your site <strong>angular</strong> and CrafterCMS is running on <strong>localhost:8080</strong>,
       no further edits are necessary; otherwise, change the file accordingly.
     </li>
     <li>Run `ng serve` to start the node server on localhost:4200</li>
